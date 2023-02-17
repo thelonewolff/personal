@@ -1,4 +1,4 @@
-This repository is create for test purposes.
+This repository is created for test purposes.
 
 You only need to install node to run this code.
 
