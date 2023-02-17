@@ -18,6 +18,12 @@ P.S. It automatically connects to my MongoDB Cluster. So, if you want to connect
 to: 'mongodb://localhost:27017/myapp' or if you want to connect it to your own cluster you can modify the link accordingly.
 
 
+Please Note: This is not a full blogging website. Also, this code allows one user to be created multiple times and also allows one user to like multiple times the same post.
+
+If you want to look at a fully functioning blogging website, you can head over to [My Blogging Website](https://blog-site17.onrender.com).
+It takes some time for it to load as it is hosted on a free platform. Please be patient.
+
+
 Functionality:
 
 You can create a new user. You will be displayed with a user id. You will need to note it down or copy it somewhere for future use.
@@ -31,8 +37,3 @@ You can create a post as shown below:
 
 You can like a post and check if it is famous as shown below:
 ![image](https://user-images.githubusercontent.com/56663315/219654118-3846e31a-25b1-424f-82db-fbeccacbc4c4.png)
-
-Please Note: This is not a full blogging website. Also, this code allows one user to be created multiple times and also allows one user to like multiple times the same post.
-
-If you want to look at a fully functioning blogging website, you can head over to [Blogging Website](https://blog-site17.onrender.com)
-It takes some time for it to load as it is hosted on a free platform. Please be patient.
