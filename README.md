@@ -1,6 +1,6 @@
 This repository is created for test purposes.
 
-You only need to install node to run this code.
+You only need to install `node` to run this code.
 
 After you install node. You'll need to run the below command once:
 `npm install`
