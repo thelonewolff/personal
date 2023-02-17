@@ -2,10 +2,10 @@ This repository is create for test purposes.
 
 You only need to install node to run this code.
 
-After you install node. You'll need to run the below command once.
+After you install node. You'll need to run the below command once:
     npm install
     
-    This will install all the dependencies associated with the project.
+This will install all the dependencies associated with the project.
 
 You can run the code using the following command:
   npm start
