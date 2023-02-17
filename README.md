@@ -3,7 +3,9 @@ This repository is created for test purposes.
 You only need to install `node` to run this code.
 
 After you install node. You'll need to run the below command.
+
 `git clone https://github.com/thelonewolff/personal.git`
+
 `npm install`
     
 This will install all the dependencies associated with the project.
