@@ -3,14 +3,14 @@ This repository is create for test purposes.
 You only need to install node to run this code.
 
 After you install node. You'll need to run the below command once:
-    npm install
+    `npm install`
     
 This will install all the dependencies associated with the project.
 
 You can run the code using the following command:
-  npm start
+  `npm start`
       or
-  node index.js
+  `node index.js`
   
 That's it! Enjoy using it.
 
