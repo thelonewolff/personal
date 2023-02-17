@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My App</title>
+  <style>
+    /* CSS styling for the app */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    input[type=text], input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: 0.8;
+    }
+    .container {
+      padding: 16px;
+    }
+    table {
+      font-family: Arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>My App</h1>
+
+    <!-- Create a user -->
+    <h2>Create a user</h2>
+    <form id="create-user-form">
+      <label for="name">Name</label>
+      <input type="text" id="user-name" name="name" placeholder="Enter name">
+
+      <label for="email">Email</label>
+      <input type="text" id="user-email" name="email" placeholder="Enter email">
+
+      <label for="password">Password</label>
+      <input type="password" id="user-password" name="password" placeholder="Enter password">
+
+      <button type="button" onclick="createUser()">Create User</button>
+    </form>
+
+    <!-- Get user info -->
+    <h2>Get user info</h2>
+    <form>
+      <label for="userId">User ID</label>
+      <input type="text" id="userId" name="userId" placeholder="Enter user ID">
+
+      <button type="button" onclick="getUser()">Get User Info</button>
+    </form>
+    <p id="userInfo"></p>
+
+    <!-- Get all posts -->
+    <h2>Get all posts</h2>
+    <button type="button" onclick="getAllPosts()">Get All Posts</button>
+    <table id="postTable">
+      <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Data</th>
+        <th>Likes</th>
+      </tr>
+    </table>
+
+    <!-- Create a post -->
+    <h2>Create a post</h2>
+    <form>
+      <label for="ID">User ID</label>
+      <input type="text" id="ID" name="userId" placeholder="Enter user ID">
+
+      <label for="data">Data</label>
+      <input type="text" id="data" name="data" placeholder="Enter post data">
+
+      <button type="button" onclick="createPost()">Create Post</button>
+    </form>
+
+    <!-- Like a post -->
+    <h2>Like a post</h2>
+    <form>
+        <label for="UserId">User ID</label>
+        <input type="text" id="UserId" name="userId" placeholder="Enter user ID">
+  
+        <label for="PostId">Post ID</label>
+        <input type="text" id="PostId" name="postId" placeholder="Enter post ID">
+  
+        <button type="button" onclick="likePost()">Like Post</button>
+      </form>
+  
+      <!-- Get famous posts -->
+      <h2>Get famous posts</h2>
+      <button id="get-top-famous-posts-button" type="button" onclick="getFamousPosts()">Get Famous Posts</button>
+      <table id="famousTable">
+        <tr>
+          <th>ID</th>
+          <th>User ID</th>
+          <th>Data</th>
+          <th>Likes</th>
+        </tr>
+      </table>
+    </div>
+  
+    <script>
+        function createUser() {
+            // Get the form element for creating a user
+        
+            // Get the user input from the form
+            const name = document.getElementById("user-name").value;
+            const email = document.getElementById("user-email").value;
+            const password = document.getElementById("user-password").value;
+        
+            // Send a POST request to the server to create the user
+            fetch("/user", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, password })
+            })
+                .then((response) => response.json())
+                .then((data) => alert(data._id))
+                .catch((error) => console.error(error));
+            }
+
+            function getUser() {
+                const userId = document.getElementById("userId").value;
+                fetch("/user/"+userId, {
+                method: "GET",
+            })
+                .then((response) => response.json())
+                .then((data) => document.getElementById("userInfo").innerHTML = "Name: "+ data.name + ", Email: "+data.email)
+                .catch((error) => console.error(error));
+            }
+            
+            function getAllPosts() {
+                const userId = document.getElementById("userId").value;
+                fetch("/post", {
+                method: "GET",
+            })
+                .then((response) => response.json())
+                .then((data) => data.forEach(post => {
+                  document.getElementById("postTable").innerHTML += `<tr><td>${post._id}</td><td>${post.userId}</td><td>${post.data}</td><td>${post.likes}</td></tr>`;
+                }))
+                .catch((error) => console.error(error));
+            } 
+        
+      
+          function createPost() {
+      
+            // Get the user input from the form
+            const userId = document.getElementById("ID").value;
+            const data = document.getElementById("data").value;
+            console.log(userId,data)
+            // Send a POST request to the server to create the post
+            fetch("/post", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ userId, data })
+            })
+              .then((response) => response.json())
+              .then((data) => console.log(data))
+              .catch((error) => console.error(error));
+        }
+      
+        function likePost(){
+      
+          // Get the user input from the form
+          const userId = document.getElementById("UserId").value;
+          const postId = document.getElementById("PostId").value;
+      
+          // Send a POST request to the server to like the post
+          fetch("/like", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userId, postId })
+          })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.error(error));
+        }
+      
+        function getFamousPosts() {
+          // Send a GET request to the server to retrieve top 10 famous posts
+          fetch("/famous")
+            .then((response) => response.json())
+            .then((data) => data.forEach(post => {
+                  document.getElementById("famousTable").innerHTML += `<tr><td>${post._id}</td><td>${post.userId}</td><td>${post.data}</td><td>${post.likes}</td></tr>`}))
+            .catch((error) => console.error(error));
+      }
+      </script
+      
+  </body>
+  </html>
+  
